@@ -3,12 +3,17 @@
 import React, { useState, useEffect } from "react";
 import ImageCard from "./components/ImageCard";
 import ImageSearch from "./components/ImageSearch";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
 
 function App() {
   const [images, setImages] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
+  const [mode, setMode] = useState(() => localStorage.theme === "dark");
 
+  const toggleDarkMode = () => {
+    setMode(!mode);
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -19,14 +24,29 @@ function App() {
         setImages(data.hits);
         setIsLoading(false);
         console.log(data);
+        const html = window.document.documentElement;
+        const prevTheme = mode ? "light" : "dark";
+        html.classList.remove(prevTheme);
+        const nextTheme = mode ? "dark" : "light";
+        html.classList.add(nextTheme);
+        localStorage.setItem("theme", nextTheme);
       } catch (err) {
         console.log(err);
       }
     };
     fetchData();
-  }, [search]);
+  }, [search, mode]);
+
   return (
-    <div className="container mx-auto">
+    <div
+      className={` ${
+        mode === true ? `dark` : ``
+      }relative container-screen bg-white dark:bg-gray-800`}
+    >
+      <Brightness4Icon
+        className="absolute z-50 right-10 top-5 text-4xl dark:text-white"
+        onClick={toggleDarkMode}
+      />
       <ImageSearch searchText={(text) => setSearch(text)} />
       {!isLoading && images.length === 0 && (
         <h1 className="text-6xl text-center mx-auto mt-32">Found Nothing</h1>

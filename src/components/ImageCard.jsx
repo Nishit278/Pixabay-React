@@ -1,15 +1,15 @@
 import React from "react";
 
 const ImageCard = ({ image }) => {
-    const tags = image.tags.split(",");
+  const tags = image.tags.split(",");
   return (
-    <div className="max-w-sm rounded overflow-hidden shadow-lg">
+    <div className="max-w-sm rounded overflow-hidden shadow-lg bg-gray-100 mx-3 my-3 dark:bg-gray-900">
       <img src={image.webformatURL} alt="" className="w-full" />
       <div className="px-6 py-4">
-        <div className="font-solid text-purple-500 text-xl mb-2">
+        <div className="font-solid text-indigo-600 text-xl mb-2 dark:text-indigo-300">
           Photo by {image.user}
         </div>
-        <ul>
+        <ul className="text-gray-900 dark:text-gray-100">
           <li>
             <strong>Views: </strong>
             {image.views}
@@ -26,7 +26,9 @@ const ImageCard = ({ image }) => {
       </div>
       <div className="px-6 py-4">
         {tags.map((tag) => (
-            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">{tag}</span>
+          <span className="inline-block bg-gray-300  rounded-full px-3 py-1 text-sm font-semibold text-gray-900 mr-2 dark:bg-gray-600 dark:text-gray-200">
+            {tag}
+          </span>
         ))}
       </div>
     </div>
