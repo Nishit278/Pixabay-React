@@ -3,7 +3,7 @@ import React from "react";
 const ImageCard = ({ image }) => {
   const tags = image.tags.split(",");
   return (
-    <div className="max-w-sm rounded overflow-hidden shadow-lg bg-gray-100 mx-3 my-3 dark:bg-gray-900">
+    <div className="max-w-sm rounded-md overflow-hidden shadow-lg bg-gray-100 mx-3 my-3 dark:bg-gray-900">
       <img src={image.webformatURL} alt="" className="w-full" />
       <div className="px-6 py-4">
         <div className="font-solid text-indigo-600 text-xl mb-2 dark:text-indigo-300">
